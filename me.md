@@ -78,4 +78,5 @@ This is Version 1.
 
 No more features.
 
-123
+
+no different try catch but a global try catch
