@@ -39,3 +39,24 @@ Background jobs.
 
 uploads/
 Uploaded screenshots.
+
+
+Client (React)
+        │
+        ▼
+Routes
+        │
+        ▼
+Validators
+        │
+        ▼
+Controllers
+        │
+        ▼
+Services
+        │
+        ▼
+Repositories
+        │
+        ▼
+MongoDB
