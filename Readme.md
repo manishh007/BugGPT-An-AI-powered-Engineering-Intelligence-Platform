@@ -13,7 +13,7 @@ Project Planning & Architecture
 - [x] Project planning
 - [x] Folder architecture
 - [x] Database design
-- [ ] Backend setup
+- [x] Backend setup
 - [ ] Authentication
 - [ ] Project management
 - [ ] Bug management
@@ -28,5 +28,14 @@ Project Planning & Architecture
 - [x] Security middleware
 - [x] Logging
 - [x] Environment variables
-- [ ] MongoDB connection
+- [x] MongoDB connection
 - [ ] Authentication
+
+
+## Datebase Process
+
+- [x] MongoDB Atlas connection
+- [x] Backend startup sequence
+- [ ] Global error handling
+- [ ] Async handler
+- [ ] Custom API responses

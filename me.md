@@ -80,3 +80,52 @@ No more features.
 
 
 no different try catch but a global try catch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**********************************************************************************************************************************************************
+
+## INTERVIEW QUESTIONS
+
+[x] Why create a custom ApiError class?
+It lets us include additional information (like HTTP status codes) with errors and keeps error responses consistent.
+
+[x]Why use an asyncHandler?
+It catches errors from asynchronous controllers automatically, so we don't repeat try/catch blocks everywhere.
+
+[x]Why register notFound before errorHandler?
+Unknown routes should first become a 404 error, and then the error handler formats the response.
