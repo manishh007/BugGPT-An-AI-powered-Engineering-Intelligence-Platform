@@ -4,6 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.get("/", (req, res) => {
         message: "BugGPT API Running"
     });
 });
+
+app.use("/api/v1/auth", authRoutes);
 
 app.use(notFound);
 

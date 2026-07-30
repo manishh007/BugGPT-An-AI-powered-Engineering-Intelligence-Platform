@@ -15,7 +15,8 @@ Project Planning & Architecture
 - [x] Database design
 - [x] Backend setup
 - [ ] Authentication
-- [ ] Project management
+- [x] User registration
+- [x] Project management
 - [ ] Bug management
 - [ ] AI engine
 - [ ] Analytics
@@ -29,6 +30,7 @@ Project Planning & Architecture
 - [x] Logging
 - [x] Environment variables
 - [x] MongoDB connection
+- [x] 404 middleware
 - [ ] Authentication
 
 
@@ -36,6 +38,6 @@ Project Planning & Architecture
 
 - [x] MongoDB Atlas connection
 - [x] Backend startup sequence
-- [ ] Global error handling
-- [ ] Async handler
+- [x] Global error handling
+- [x] Async handler
 - [ ] Custom API responses

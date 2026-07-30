@@ -129,3 +129,34 @@ It catches errors from asynchronous controllers automatically, so we don't repea
 
 [x]Why register notFound before errorHandler?
 Unknown routes should first become a 404 error, and then the error handler formats the response.
+
+
+
+**********************************************************************************************************************************************************
+
+
+## here is the 1st user created
+
+{
+  "name": "Developer1",
+  "email": "developer1@example.com",
+  "password": "password123",
+  "role": "Developer"
+}
+
+
+## this was the response 
+
+{
+    "success": true,
+    "message": "User registered successfully",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNmI5MjIxNjVkZDYxZTAyZTFlOGE1OSIsImlhdCI6MTc4NTQzNDY1OCwiZXhwIjoxNzg2MDM5NDU4fQ.Fy8yTxmt0RLNAs7AZH_3Ez1zVJoxla8JWtbHtXhAHe4",
+    "data": {
+        "id": "6a6b922165dd61e02e1e8a59",
+        "name": "Developer1",
+        "email": "developer1@example.com",
+        "role": "Developer"
+    }
+}
+
+
