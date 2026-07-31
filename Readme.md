@@ -14,8 +14,11 @@ Project Planning & Architecture
 - [x] Folder architecture
 - [x] Database design
 - [x] Backend setup
-- [ ] Authentication
 - [x] User registration
+- [x] User login
+- [x] JWT authentication
+- [x] Protected routes
+- [x] Current user endpoint
 - [x] Project management
 - [ ] Bug management
 - [ ] AI engine
