@@ -13,6 +13,20 @@ const registerUser = async (userData) => {
     return user;
 };
 
-export {
-    registerUser,
+const loginUser = async ({ email, password }) => {
+    const user = await findUserByEmail(email);
+
+    if (!user) {
+        throw new ApiError(401, "Invalid email or password");
+    }
+
+    const isPasswordCorrect = await user.comparePassword(password);
+
+    if (!isPasswordCorrect) {
+        throw new ApiError(401, "Invalid email or password");
+    }
+
+    return user;
 };
+
+export { registerUser, loginUser };
