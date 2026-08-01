@@ -19,7 +19,7 @@ const createProject = asyncHandler(async (req, res) => {
 });
 
 const getAllProjects = asyncHandler(async (req, res) => {
-    const projects = await getProjects();
+    const projects = await getProjects(req.user._id);
 
     res.status(200).json({
         success: true,

@@ -8,8 +8,16 @@ const findProjectById = async (projectId) => {
     return await Project.findById(projectId);
 };
 
-const findAllProjects = async () => {
-    return await Project.find();
+const findUserProjects = async (userId) => {
+    return await Project.find({
+        $or: [
+            { createdBy: userId },
+            { members: userId },
+        ],
+    })
+        .populate("createdBy", "name email role")
+        .populate("members", "name email role")
+        .sort({ createdAt: -1 });
 };
 
 const updateProject = async (projectId, updatedData) => {
@@ -23,10 +31,18 @@ const deleteProject = async (projectId) => {
     return await Project.findByIdAndDelete(projectId);
 };
 
+const findProjectByName = async (projectName, userId) => {
+    return await Project.findOne({
+        name: projectName,
+        createdBy: userId,
+    });
+};
+
 export {
     createProject,
     findProjectById,
-    findAllProjects,
+    findUserProjects,
     updateProject,
     deleteProject,
+    findProjectByName
 };

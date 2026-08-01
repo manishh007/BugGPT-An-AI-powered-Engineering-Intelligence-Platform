@@ -1,14 +1,28 @@
 import {
     createProject,
     findProjectById,
-    findAllProjects,
+    findUserProjects,
     updateProject,
     deleteProject,
+    findProjectByName,
 } from "../repositories/projectRepository.js";
 
 import ApiError from "../utils/ApiError.js";
 
 const createNewProject = async (projectData, userId) => {
+
+    const existingProject = await findProjectByName(
+        projectData.name,
+        userId
+    );
+
+    if (existingProject) {
+        throw new ApiError(
+            409,
+            "Project with this name already exists."
+        );
+    }
+
     const newProject = await createProject({
         ...projectData,
         createdBy: userId,
@@ -18,8 +32,8 @@ const createNewProject = async (projectData, userId) => {
     return newProject;
 };
 
-const getProjects = async () => {
-    return await findAllProjects();
+const getProjects = async (userId) => {
+    return await findUserProjects(userId);
 };
 
 const getProject = async (projectId) => {
