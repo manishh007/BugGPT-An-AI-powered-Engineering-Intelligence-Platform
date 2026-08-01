@@ -4,14 +4,14 @@ import {
     findUserProjects,
     updateProject,
     deleteProject,
-    findProjectByName,
+    findProjectBySlug,
 } from "../repositories/projectRepository.js";
 
 import ApiError from "../utils/ApiError.js";
 
 const createNewProject = async (projectData, userId) => {
 
-    const existingProject = await findProjectByName(
+    const existingProject = await findProjectBySlug(
         projectData.name,
         userId
     );

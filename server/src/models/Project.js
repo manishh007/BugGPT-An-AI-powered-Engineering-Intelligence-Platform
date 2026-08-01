@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const projectSchema = new mongoose.Schema(
     {
@@ -8,6 +9,13 @@ const projectSchema = new mongoose.Schema(
             trim: true,
             minlength: 3,
             maxlength: 100,
+        },
+
+        slug: {
+            type: String,
+            required: true,
+            lowercase: true,
+            trim: true,
         },
 
         description: {
@@ -75,9 +83,25 @@ const projectSchema = new mongoose.Schema(
     }
 );
 
-projectSchema.index({
-    createdBy: 1,
-    name: 1,
+projectSchema.index(
+    {
+        createdBy: 1,
+        slug: 1,
+    },
+    {
+        unique: true,
+    }
+);
+projectSchema.pre("validate", function (next) {
+    if (this.isModified("name")) {
+        this.slug = slugify(this.name, {
+            lower: true,
+            strict: true,
+            trim: true,
+        });
+    }
+
+    next();
 });
 
 

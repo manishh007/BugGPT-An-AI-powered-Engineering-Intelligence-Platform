@@ -1,4 +1,5 @@
 import Project from "../models/Project.js";
+import slugify from "slugify";
 
 const createProject = async (projectData) => {
     return await Project.create(projectData);
@@ -31,9 +32,15 @@ const deleteProject = async (projectId) => {
     return await Project.findByIdAndDelete(projectId);
 };
 
-const findProjectByName = async (projectName, userId) => {
+const findProjectBySlug = async (projectName, userId) => {
+    const slug = slugify(projectName, {
+        lower: true,
+        strict: true,
+        trim: true,
+    });
+
     return await Project.findOne({
-        name: projectName,
+        slug,
         createdBy: userId,
     });
 };
@@ -44,5 +51,5 @@ export {
     findUserProjects,
     updateProject,
     deleteProject,
-    findProjectByName
+    findProjectBySlug,
 };
