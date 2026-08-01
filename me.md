@@ -130,6 +130,24 @@ It catches errors from asynchronous controllers automatically, so we don't repea
 [x]Why register notFound before errorHandler?
 Unknown routes should first become a 404 error, and then the error handler formats the response.
 
+[x]Why doesn't the controller call the repository directly?
+Because the service layer separates business logic from database logic. This keeps controllers thin, repositories focused on data access, and makes the application easier to maintain and test.
+
+[x]Why set createdBy in the service instead of accepting it from the client?
+Because client input cannot be trusted. The authenticated user's ID comes from the verified JWT (req.user), so setting createdBy in the service prevents users from impersonating others.
+
+[x]Why is the creator added to members automatically?
+Every project should include its creator as a member by default. This is a business rule, so it belongs in the service layer rather than the repository.
+
+Why doesn't the controller access MongoDB directly?
+Because controllers should only handle HTTP requests and responses. Database access belongs in the repository, while business rules belong in the service.
+
+Q2. Why use req.user._id instead of accepting createdBy from the client?
+The authenticated user's identity has already been verified by the JWT middleware. Using req.user._id prevents users from impersonating someone else.
+
+Q3. Why return HTTP 201 for project creation?
+201 Created is the standard HTTP status code indicating that a new resource has been successfully created.
+
 
 
 **********************************************************************************************************************************************************
