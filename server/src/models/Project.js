@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import slugify from "slugify";
+import generateSlug from "../utils/generateSlug.js";
 
 const projectSchema = new mongoose.Schema(
     {
@@ -92,16 +92,25 @@ projectSchema.index(
         unique: true,
     }
 );
+
+// projectSchema.pre("validate", function (next) {
+//     if (this.isModified("name")) {
+//         this.slug = generateSlug(this.name);
+//     }
+
+//     next();
+// });
+
 projectSchema.pre("validate", function (next) {
-    if (this.isModified("name")) {
-        this.slug = slugify(this.name, {
-            lower: true,
-            strict: true,
-            trim: true,
-        });
+
+    if (this.isNew) {
+
+        this.slug = generateSlug(this.name);
+
     }
 
     next();
+
 });
 
 

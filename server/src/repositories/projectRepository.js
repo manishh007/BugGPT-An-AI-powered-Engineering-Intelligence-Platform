@@ -1,5 +1,4 @@
 import Project from "../models/Project.js";
-import slugify from "slugify";
 
 const createProject = async (projectData) => {
     return await Project.create(projectData);
@@ -17,7 +16,7 @@ const findUserProjects = async (userId) => {
         ],
     })
         .populate("createdBy", "name email role")
-        .populate("members", "name email role")
+        .populate("members.user", "name email role")
         .sort({ createdAt: -1 });
 };
 
@@ -32,17 +31,13 @@ const deleteProject = async (projectId) => {
     return await Project.findByIdAndDelete(projectId);
 };
 
-const findProjectBySlug = async (projectName, userId) => {
-    const slug = slugify(projectName, {
-        lower: true,
-        strict: true,
-        trim: true,
-    });
-
-    return await Project.findOne({
-        slug,
-        createdBy: userId,
-    });
+const slugExists = async (slug, userId) => {
+    return Boolean(
+        await Project.exists({
+            slug,
+            createdBy: userId,
+        })
+    );
 };
 
 export {
@@ -51,5 +46,5 @@ export {
     findUserProjects,
     updateProject,
     deleteProject,
-    findProjectBySlug,
+    slugExists,
 };
