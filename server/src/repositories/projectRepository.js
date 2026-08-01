@@ -12,7 +12,7 @@ const findUserProjects = async (userId) => {
     return await Project.find({
         $or: [
             { createdBy: userId },
-            { members: userId },
+            { "members.user": userId },
         ],
     })
         .populate("createdBy", "name email role")

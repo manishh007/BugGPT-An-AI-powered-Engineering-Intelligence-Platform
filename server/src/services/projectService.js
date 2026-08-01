@@ -26,7 +26,12 @@ const createNewProject = async (projectData, userId) => {
     const newProject = await createProject({
         ...projectData,
         createdBy: userId,
-        members: [userId],
+        members: [
+            {
+                user: userId,
+                role: "Owner",
+            },
+        ],
     });
 
     return newProject;

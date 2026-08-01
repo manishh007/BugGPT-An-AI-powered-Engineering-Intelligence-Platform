@@ -17,6 +17,25 @@ const projectSchema = new mongoose.Schema(
             maxlength: 500,
         },
 
+        priority: {
+            type: String,
+            enum: ["Low", "Medium", "High"],
+            default: "Medium",
+        },
+
+        visibility: {
+            type: String,
+            enum: ["Private", "Team"],
+            default: "Private",
+        },
+
+        tags: [
+            {
+                type: String,
+                trim: true,
+            },
+        ],
+
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
@@ -25,8 +44,22 @@ const projectSchema = new mongoose.Schema(
 
         members: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
+                user: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
+                    required: true,
+                },
+
+                role: {
+                    type: String,
+                    enum: ["Owner", "Developer", "Tester"],
+                    default: "Developer",
+                },
+
+                joinedAt: {
+                    type: Date,
+                    default: Date.now,
+                },
             },
         ],
 
@@ -35,11 +68,18 @@ const projectSchema = new mongoose.Schema(
             enum: ["Active", "Completed", "Archived"],
             default: "Active",
         },
+
     },
     {
         timestamps: true,
     }
 );
+
+projectSchema.index({
+    createdBy: 1,
+    name: 1,
+});
+
 
 const Project = mongoose.model("Project", projectSchema);
 
