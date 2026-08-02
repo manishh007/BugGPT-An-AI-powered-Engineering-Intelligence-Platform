@@ -162,9 +162,7 @@ Q3. Why return HTTP 201 for project creation?
   "role": "Developer"
 }
 
-
-## this was the response 
-
+>> this was the response 
 {
     "success": true,
     "message": "User registered successfully",
@@ -177,4 +175,39 @@ Q3. Why return HTTP 201 for project creation?
     }
 }
 
+## Here is user 2
+{
+  "name": "Developer2",
+  "email": "developer2@example.com",
+  "password": "password123",
+  "role": "Developer"
+}
+>> Here is response 
+{
+    "success": true,
+    "message": "User registered successfully",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNmY4MDAzMjg0NGQ3MWJiYmZjMzg2NCIsImlhdCI6MTc4NTY5MjE2MywiZXhwIjoxNzg2Mjk2OTYzfQ.61z5t2LBIJrRWegPn8HWB-WP1vLYOKOBxyk2qYxTsYg",
+    "data": {
+        "id": "6a6f80032844d71bbbfc3864",
+        "name": "Developer2",
+        "email": "developer2@example.com",
+        "role": "Developer"
+    }
+}
 
+
+## Here is project 1
+{
+    "name":"BugGPT",
+    "description":"AI Powered Bug Tracking Platform",
+
+    "priority":"High",
+
+    "visibility":"Private",
+
+    "tags":[
+        "AI",
+        "MERN",
+        "Backend"
+    ]
+}

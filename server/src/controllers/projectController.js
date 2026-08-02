@@ -29,7 +29,7 @@ const getAllProjects = asyncHandler(async (req, res) => {
 });
 
 const getProjectById = asyncHandler(async (req, res) => {
-    const project = await getProject(req.params.id);
+    const project = await getProject(req.params.id, req.user._id);
 
     res.status(200).json({
         success: true,
@@ -38,7 +38,7 @@ const getProjectById = asyncHandler(async (req, res) => {
 });
 
 const updateProject = asyncHandler(async (req, res) => {
-    const project = await editProject(req.params.id, req.body);
+    const project = await editProject(req.params.id, req.body, req.user._id);
 
     res.status(200).json({
         success: true,
@@ -48,7 +48,7 @@ const updateProject = asyncHandler(async (req, res) => {
 });
 
 const deleteProject = asyncHandler(async (req, res) => {
-    await removeProject(req.params.id);
+    await removeProject(req.params.id, req.user._id);
 
     res.status(200).json({
         success: true,

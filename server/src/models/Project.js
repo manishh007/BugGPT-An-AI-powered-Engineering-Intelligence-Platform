@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import generateSlug from "../utils/generateSlug.js";
 
 const projectSchema = new mongoose.Schema(
     {
@@ -80,6 +79,13 @@ const projectSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
+
+        toJSON: {
+            transform(doc, ret) {
+                delete ret.__v;
+                return ret;
+            },
+        },
     }
 );
 
@@ -101,17 +107,17 @@ projectSchema.index(
 //     next();
 // });
 
-projectSchema.pre("validate", function (next) {
+// projectSchema.pre("validate", function (next) {
 
-    if (this.isNew) {
+//     if (this.isNew) {
 
-        this.slug = generateSlug(this.name);
+//         this.slug = generateSlug(this.name);
 
-    }
+//     }
 
-    next();
+//     next();
 
-});
+// });
 
 
 const Project = mongoose.model("Project", projectSchema);

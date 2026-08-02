@@ -5,7 +5,9 @@ const createProject = async (projectData) => {
 };
 
 const findProjectById = async (projectId) => {
-    return await Project.findById(projectId);
+    return await Project.findById(projectId)
+        .populate("createdBy", "name email role")
+        .populate("members.user", "name email role");
 };
 
 const findUserProjects = async (userId) => {

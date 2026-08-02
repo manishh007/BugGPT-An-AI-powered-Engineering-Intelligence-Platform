@@ -8,6 +8,7 @@ import {
 } from "../repositories/projectRepository.js";
 
 import ApiError from "../utils/ApiError.js";
+import authorizeProjectOwner from "../utils/authorizeProject.js";
 import generateUniqueSlug from "../utils/generateUniqueSlug.js";
 
 /**
@@ -48,8 +49,23 @@ const getProjects = async (userId) => {
 /**
  * Get a single project
  */
-const getProject = async (projectId) => {
+const getProject = async (projectId, loggedInUserId) => {
     const project = await findProjectById(projectId);
+
+    const isOwner =
+        project.createdBy._id.toString() === loggedInUserId.toString();
+
+    const isMember = project.members.some(
+        (member) =>
+            member.user._id.toString() === loggedInUserId.toString()
+    );
+
+    if (!isOwner && !isMember) {
+        throw new ApiError(
+            403,
+            "You are not authorized to view this project."
+        );
+    }
 
     if (!project) {
         throw new ApiError(404, "Project not found");
@@ -73,12 +89,10 @@ const editProject = async (
     }
 
     // Only Owner can update
-    if (project.createdBy.toString() !== loggedInUserId.toString()) {
-        throw new ApiError(
-            403,
-            "You are not authorized to update this project."
-        );
-    }
+    authorizeProjectOwner(
+        project,
+        loggedInUserId
+    );
 
     const updatedProject = await updateProject(
         projectId,
@@ -102,12 +116,10 @@ const removeProject = async (
     }
 
     // Only Owner can delete
-    if (project.createdBy.toString() !== loggedInUserId.toString()) {
-        throw new ApiError(
-            403,
-            "You are not authorized to delete this project."
-        );
-    }
+    authorizeProjectOwner(
+        project,
+        loggedInUserId
+    );
 
     await deleteProject(projectId);
 
