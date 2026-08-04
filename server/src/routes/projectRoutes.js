@@ -1,5 +1,6 @@
 import express from "express";
-
+import { createProjectValidator } from "../validators/projectValidator.js";
+import validate from "../middleware/validate.js";
 import protect from "../middleware/authMiddleware.js";
 
 import {
@@ -12,7 +13,13 @@ import {
 
 const router = express.Router();
 
-router.post("/", protect, createProject);
+router.post(
+    "/",
+    protect,
+    createProjectValidator,
+    validate,
+    createProject
+);
 
 router.get("/", protect, getAllProjects);
 
