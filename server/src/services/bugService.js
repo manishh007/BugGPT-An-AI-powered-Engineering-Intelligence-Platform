@@ -8,26 +8,9 @@ import {
 } from "../repositories/bugRepository.js";
 
 import { findProjectById } from "../repositories/projectRepository.js";
-
+import generateReadableId from "../utils/generateReadableId.js";
 import ApiError from "../utils/ApiError.js";
-
 import generateSequence from "../utils/generateSequence.js";
-
-const createNewBug = async (
-    bugData,
-    loggedInUserId
-) => {
-
-    const project = await findProjectById(bugData.project);
-
-    if (!project) {
-        throw new ApiError(
-            404,
-            "Project not found."
-        );
-    }
-
-};
 
 const createNewBug = async (
     bugData,
@@ -61,13 +44,16 @@ const createNewBug = async (
         "BUG"
     );
 
-    const bugId = `BG-${sequence}`;
+    const bugId = generateReadableId(
+        "BG",
+        sequence
+    );
 
     const newBugData = {
         ...bugData,
         bugId,
         reportedBy: loggedInUserId,
-        labels: [...new Set(bugData.labels || [])],
+        labels: [...new Set((bugData.labels || []).map(label => label.toLowerCase()))],
     };
 
     const bug = await createBug(newBugData);

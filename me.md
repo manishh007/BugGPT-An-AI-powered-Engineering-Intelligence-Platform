@@ -211,3 +211,77 @@ Q3. Why return HTTP 201 for project creation?
         "Backend"
     ]
 }
+
+
+## Here is bug 1
+{
+  "project": "6a6f7e7b2844d71bbbfc385d",
+  "title": "Login button is not working",
+  "description": "Clicking the login button redirects back to the login page without logging in.",
+  "priority": "High",
+  "severity": "Critical",
+  "labels": [
+    "Frontend",
+    "Authentication",
+    "Login",
+    "Frontend"
+  ],
+  "environment": {
+    "browser": "Chrome 138",
+    "operatingSystem": "Windows 11",
+    "appVersion": "v1.0.0"
+  },
+  "reproductionSteps": [
+    "Open the login page",
+    "Enter valid email and password",
+    "Click the Login button"
+  ],
+  "expectedResult": "User should be redirected to the dashboard.",
+  "actualResult": "User remains on the login page without any error message."
+}
+
+>>response
+{
+    "success": true,
+    "message": "Bug created successfully.",
+    "data": {
+        "bugId": "BG-1",
+        "title": "Login button is not working",
+        "description": "Clicking the login button redirects back to the login page without logging in.",
+        "project": "6a6f7e7b2844d71bbbfc385d",
+        "reportedBy": "6a6b922165dd61e02e1e8a59",
+        "assignedTo": null,
+        "status": "Open",
+        "priority": "High",
+        "severity": "Critical",
+        "labels": [
+            "frontend",
+            "authentication",
+            "login"
+        ],
+        "environment": {
+            "browser": "Chrome 138",
+            "operatingSystem": "Windows 11",
+            "appVersion": "v1.0.0"
+        },
+        "reproductionSteps": [
+            "Open the login page",
+            "Enter valid email and password",
+            "Click the Login button"
+        ],
+        "expectedResult": "User should be redirected to the dashboard.",
+        "actualResult": "User remains on the login page without any error message.",
+        "aiAnalysis": {
+            "rootCause": "",
+            "suggestedFix": "",
+            "confidence": 0,
+            "generatedAt": null,
+            "estimatedComplexity": "Medium"
+        },
+        "resolvedAt": null,
+        "isArchived": false,
+        "_id": "6a74ec6760e3c1964a5bf14f",
+        "createdAt": "2026-08-06T20:19:51.117Z",
+        "updatedAt": "2026-08-06T20:19:51.117Z"
+    }
+}
