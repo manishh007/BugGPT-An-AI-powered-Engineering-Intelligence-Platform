@@ -12,7 +12,7 @@ const createBug = async (bugData) => {
  */
 const findBugById = async (bugId) => {
     return await Bug.findById(bugId)
-        .populate("project", "name slug")
+        .populate("project", "name slug createdBy")
         .populate("reportedBy", "name email role")
         .populate("assignedTo", "name email role");
 };
@@ -34,6 +34,7 @@ const findProjectBugs = async (projectId) => {
         project: projectId,
         isArchived: false,
     })
+        .populate("project", "name slug createdBy")
         .populate("reportedBy", "name email role")
         .populate("assignedTo", "name email role")
         .sort({

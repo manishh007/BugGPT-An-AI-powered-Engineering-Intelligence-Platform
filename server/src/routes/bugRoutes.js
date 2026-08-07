@@ -5,6 +5,10 @@ import protect from "../middleware/authMiddleware.js";
 
 import {
     createBug,
+    getProjectBugs,
+    getBugById,
+    updateBug,
+    deleteBug,
 } from "../controllers/bugController.js";
 
 const router = express.Router();
@@ -18,6 +22,42 @@ router.post(
     createBugValidator,
     validate,
     createBug
+);
+
+/**
+ * Get all bugs of a project
+ */
+router.get(
+    "/project/:projectId",
+    protect,
+    getProjectBugs
+);
+
+/**
+ * Get Bug by ID
+ */
+router.get(
+    "/:id",
+    protect,
+    getBugById
+);
+
+/**
+ * Update Bug
+ */
+router.put(
+    "/:id",
+    protect,
+    updateBug
+);
+
+/**
+ * Archive Bug
+ */
+router.delete(
+    "/:id",
+    protect,
+    deleteBug
 );
 
 export default router;

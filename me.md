@@ -212,6 +212,9 @@ Q3. Why return HTTP 201 for project creation?
     ]
 }
 
+>> response
+6a6f7e7b2844d71bbbfc385d
+
 
 ## Here is bug 1
 {

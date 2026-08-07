@@ -44,3 +44,27 @@ Project Planning & Architecture
 - [x] Global error handling
 - [x] Async handler
 - [ ] Custom API responses
+
+## Features
+
+### Authentication
+- JWT Authentication
+- Secure Login & Registration
+- Role-based User Management
+
+### Project Management
+- Create Project
+- View Projects
+- Update Project
+- Delete Project
+- Project Membership
+- Unique Project Slugs
+
+### Bug Management (In Progress)
+- ✅ Create Bug
+- Automatic Bug ID Generation (BG-0001)
+- Project-based Bug Tracking
+- Priority & Severity Management
+- Environment Details
+- Reproduction Steps
+- AI-ready Bug Schema

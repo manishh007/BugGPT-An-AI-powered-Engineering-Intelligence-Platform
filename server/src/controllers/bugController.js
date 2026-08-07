@@ -2,6 +2,10 @@ import asyncHandler from "../utils/asyncHandler.js";
 
 import {
     createNewBug,
+    getBugsByProject,
+    getBug,
+    editBug,
+    removeBug,
 } from "../services/bugService.js";
 
 const createBug = asyncHandler(async (req, res) => {
@@ -19,6 +23,69 @@ const createBug = asyncHandler(async (req, res) => {
 
 });
 
+const getProjectBugs = asyncHandler(async (req, res) => {
+
+    const bugs = await getBugsByProject(
+        req.params.projectId,
+        req.user._id
+    );
+
+    res.status(200).json({
+        success: true,
+        count: bugs.length,
+        data: bugs,
+    });
+
+});
+
+const getBugById = asyncHandler(async (req, res) => {
+
+    const bug = await getBug(
+        req.params.id,
+        req.user._id
+    );
+
+    res.status(200).json({
+        success: true,
+        data: bug,
+    });
+
+});
+
+const updateBug = asyncHandler(async (req, res) => {
+
+    const bug = await editBug(
+        req.params.id,
+        req.body,
+        req.user._id
+    );
+
+    res.status(200).json({
+        success: true,
+        message: "Bug updated successfully.",
+        data: bug,
+    });
+
+});
+
+const deleteBug = asyncHandler(async (req, res) => {
+
+    await removeBug(
+        req.params.id,
+        req.user._id
+    );
+
+    res.status(200).json({
+        success: true,
+        message: "Bug archived successfully.",
+    });
+
+});
+
 export {
     createBug,
+    getProjectBugs,
+    getBugById,
+    updateBug,
+    deleteBug,
 };
