@@ -288,3 +288,73 @@ Q3. Why return HTTP 201 for project creation?
         "updatedAt": "2026-08-06T20:19:51.117Z"
     }
 }
+
+## Bug 2
+{
+    "project": "6a6f7e7b2844d71bbbfc385d",
+    "title": "Profile page crashes",
+    "description": "Profile page crashes after clicking the Edit Profile button.",
+    "priority": "High",
+    "severity": "Major",
+    "labels": [
+        "Frontend",
+        "React"
+    ],
+    "environment": {
+        "browser": "Chrome 138",
+        "operatingSystem": "Windows 11",
+        "appVersion": "v1.0.0"
+    },
+    "reproductionSteps": [
+        "Login",
+        "Open Profile",
+        "Click Edit Profile"
+    ],
+    "expectedResult": "Profile editor should open.",
+    "actualResult": "Application crashes."
+}
+
+>> Response
+{
+    "success": true,
+    "message": "Bug created successfully.",
+    "data": {
+        "bugId": "BG-0002",
+        "title": "Profile page crashes",
+        "description": "Profile page crashes after clicking the Edit Profile button.",
+        "project": "6a6f7e7b2844d71bbbfc385d",
+        "reportedBy": "6a6b922165dd61e02e1e8a59",
+        "assignedTo": null,
+        "status": "Open",
+        "priority": "High",
+        "severity": "Major",
+        "labels": [
+            "frontend",
+            "react"
+        ],
+        "environment": {
+            "browser": "Chrome 138",
+            "operatingSystem": "Windows 11",
+            "appVersion": "v1.0.0"
+        },
+        "reproductionSteps": [
+            "Login",
+            "Open Profile",
+            "Click Edit Profile"
+        ],
+        "expectedResult": "Profile editor should open.",
+        "actualResult": "Application crashes.",
+        "aiAnalysis": {
+            "rootCause": "",
+            "suggestedFix": "",
+            "confidence": 0,
+            "generatedAt": null,
+            "estimatedComplexity": "Medium"
+        },
+        "resolvedAt": null,
+        "isArchived": false,
+        "_id": "6a7a0b3994f5a82fa2032568",
+        "createdAt": "2026-08-10T17:32:42.022Z",
+        "updatedAt": "2026-08-10T17:32:42.022Z"
+    }
+}

@@ -144,6 +144,13 @@ const editBug = async (
         );
     }
 
+    if (bug.isArchived) {
+        throw new ApiError(
+            400,
+            "Archived bugs cannot be modified."
+        );
+    }
+
     authorizeBugUpdate(
         bug,
         loggedInUserId

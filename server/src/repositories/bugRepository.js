@@ -54,6 +54,7 @@ const updateBug = async (bugId, updatedData) => {
             runValidators: true,
         }
     )
+        .populate("project", "name slug")
         .populate("reportedBy", "name email role")
         .populate("assignedTo", "name email role");
 };
