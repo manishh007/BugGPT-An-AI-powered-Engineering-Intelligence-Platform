@@ -113,6 +113,13 @@ const getBug = async (
         bug.project._id
     );
 
+    if (!project) {
+        throw new ApiError(
+            404,
+            "Project not found."
+        );
+    }
+
     const isProjectMember = project.members.some(
         (member) =>
             member.user._id.toString() ===

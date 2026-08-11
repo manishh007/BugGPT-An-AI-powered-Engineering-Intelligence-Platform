@@ -1,5 +1,8 @@
 import express from "express";
-import { createBugValidator } from "../validators/bugValidator.js";
+import {
+    createBugValidator,
+    updateBugValidator,
+} from "../validators/bugValidator.js";
 import validate from "../middleware/validate.js";
 import protect from "../middleware/authMiddleware.js";
 
@@ -48,6 +51,8 @@ router.get(
 router.put(
     "/:id",
     protect,
+    updateBugValidator,
+    validate,
     updateBug
 );
 
