@@ -358,3 +358,75 @@ Q3. Why return HTTP 201 for project creation?
         "updatedAt": "2026-08-10T17:32:42.022Z"
     }
 }
+
+## Here is Comment in Bug 2
+{
+    "content": "I have reproduced this issue and I'm investigating the root cause."
+}
+
+>> response
+{
+    "success": true,
+    "message": "Comment added successfully.",
+    "data": {
+        "bug": "6a7a0b3994f5a82fa2032568",
+        "user": "6a6b922165dd61e02e1e8a59",
+        "content": "I have reproduced this issue and I'm investigating the root cause.",
+        "_id": "6a7cc2274e3ddb04a5d04e30",
+        "createdAt": "2026-08-12T18:57:43.385Z",
+        "updatedAt": "2026-08-12T18:57:43.385Z"
+    }
+} >> deleted
+
+{
+    "success": true,
+    "message": "Comment added successfully.",
+    "data": {
+        "bug": "6a7a0b3994f5a82fa2032568",
+        "user": "6a6b922165dd61e02e1e8a59",
+        "content": "I have reproduced this issue and I'm investigating the root cause.",
+        "_id": "6a7cc3874e3ddb04a5d04e36",
+        "createdAt": "2026-08-12T19:03:35.402Z",
+        "updatedAt": "2026-08-12T19:03:35.402Z"
+    }
+}
+
+## here is Bug 3
+{
+    "project": "6a6f7e7b2844d71bbbfc385d",
+    "title": "Activity timeline test",
+    "description": "Testing automatic activity creation.",
+    "priority": "Medium",
+    "severity": "Minor"
+}
+
+>> response
+{
+    "success": true,
+    "message": "Bug created successfully.",
+    "data": {
+        "bugId": "BG-0003",
+        "title": "Activity timeline test",
+        "description": "Testing automatic activity creation.",
+        "project": "6a6f7e7b2844d71bbbfc385d",
+        "reportedBy": "6a6b922165dd61e02e1e8a59",
+        "assignedTo": null,
+        "status": "Open",
+        "priority": "Medium",
+        "severity": "Minor",
+        "labels": [],
+        "reproductionSteps": [],
+        "aiAnalysis": {
+            "rootCause": "",
+            "suggestedFix": "",
+            "confidence": 0,
+            "generatedAt": null,
+            "estimatedComplexity": "Medium"
+        },
+        "resolvedAt": null,
+        "isArchived": false,
+        "_id": "6a7cc5c0fd7666a1632c65ac",
+        "createdAt": "2026-08-12T19:13:04.083Z",
+        "updatedAt": "2026-08-12T19:13:04.083Z"
+    }
+}

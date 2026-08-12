@@ -12,6 +12,7 @@ import generateReadableId from "../utils/generateReadableId.js";
 import ApiError from "../utils/ApiError.js";
 import generateSequence from "../utils/generateSequence.js";
 import authorizeProjectOwner from "../utils/authorizeProject.js";
+import { createActivity } from "../repositories/activityRepository.js";
 
 const createNewBug = async (
     bugData,
@@ -58,6 +59,12 @@ const createNewBug = async (
     };
 
     const bug = await createBug(newBugData);
+
+    await createActivity({
+        bug: bug._id,
+        user: loggedInUserId,
+        action: "created",
+    });
 
     return bug;
 
@@ -201,6 +208,20 @@ const editBug = async (
         bugId,
         allowedUpdates
     );
+
+    if (
+        allowedUpdates.status &&
+        allowedUpdates.status !== bug.status
+    ) {
+        await createActivity({
+            bug: bugId,
+            user: loggedInUserId,
+            action: "status_changed",
+            field: "status",
+            oldValue: bug.status,
+            newValue: allowedUpdates.status,
+        });
+    }
 
     return updatedBug;
 };

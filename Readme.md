@@ -6,7 +6,7 @@ Status
 
 Current Phase
 
-Project Planning & Architecture
+Backend Feature Development
 
 ## Current Progress
 
@@ -21,7 +21,7 @@ Project Planning & Architecture
 - [x] Current user endpoint
 - [x] Project management
 - [x] Bug management
-- [ ] Comments & activity timeline
+- [x] Comments & activity timeline
 - [ ] AI engine
 - [ ] Analytics
 - [ ] Frontend
@@ -89,3 +89,14 @@ Project Planning & Architecture
 - [x] Create & Update Validation
 - [x] AI-ready Bug Schema
 
+### Comments & Activity Timeline
+
+- [x] Create comments
+- [x] View bug comments
+- [x] Update own comments
+- [x] Delete own comments
+- [x] Comment ownership authorization
+- [x] Bug activity timeline
+- [x] Bug creation activity
+- [x] Status change activity
+- [x] No-op activity protection
