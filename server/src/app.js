@@ -7,6 +7,7 @@ import errorHandler from "./middleware/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import bugRoutes from "./routes/bugRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
 const app = express();
 
@@ -24,6 +25,11 @@ app.get("/", (req, res) => {
         message: "BugGPT API Running"
     });
 });
+
+app.use(
+    "/api/v1",
+    commentRoutes
+);
 
 app.use("/api/v1/auth", authRoutes);
 
