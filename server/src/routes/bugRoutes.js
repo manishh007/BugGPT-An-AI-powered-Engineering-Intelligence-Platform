@@ -12,6 +12,7 @@ import {
     getBugById,
     updateBug,
     deleteBug,
+    analyzeBugWithAI,
 } from "../controllers/bugController.js";
 
 const router = express.Router();
@@ -34,6 +35,15 @@ router.get(
     "/project/:projectId",
     protect,
     getProjectBugs
+);
+
+/**
+ * Analyze Bug with AI
+ */
+router.post(
+    "/:id/analyze",
+    protect,
+    analyzeBugWithAI
 );
 
 /**

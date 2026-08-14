@@ -13,6 +13,9 @@ import ApiError from "../utils/ApiError.js";
 import generateSequence from "../utils/generateSequence.js";
 import authorizeProjectOwner from "../utils/authorizeProject.js";
 import { createActivity } from "../repositories/activityRepository.js";
+import {
+    generateBugAnalysis,
+} from "../ai/geminiService.js";
 
 const createNewBug = async (
     bugData,
@@ -143,6 +146,67 @@ const getBug = async (
     return bug;
 };
 
+const analyzeBug = async (
+    bugId,
+    loggedInUserId
+) => {
+    const bug = await findBugById(bugId);
+
+    if (!bug) {
+        throw new ApiError(
+            404,
+            "Bug not found."
+        );
+    }
+
+    if (bug.isArchived) {
+        throw new ApiError(
+            400,
+            "Archived bugs cannot be analyzed."
+        );
+    }
+
+    const project = await findProjectById(
+        bug.project._id
+    );
+
+    if (!project) {
+        throw new ApiError(
+            404,
+            "Project not found."
+        );
+    }
+
+    const isProjectMember =
+        project.members.some(
+            (member) =>
+                member.user._id.toString() ===
+                loggedInUserId.toString()
+        );
+
+    if (!isProjectMember) {
+        throw new ApiError(
+            403,
+            "You are not authorized to analyze this bug."
+        );
+    }
+
+    const analysis =
+        await generateBugAnalysis(bug);
+
+    const updatedBug = await updateBug(
+        bugId,
+        {
+            aiAnalysis: {
+                ...analysis,
+                generatedAt: new Date(),
+            },
+        }
+    );
+
+    return updatedBug;
+};
+
 const editBug = async (
     bugId,
     updatedData,
@@ -255,4 +319,5 @@ export {
     getBug,
     editBug,
     removeBug,
+    analyzeBug,
 };

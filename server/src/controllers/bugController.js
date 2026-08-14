@@ -6,6 +6,7 @@ import {
     getBug,
     editBug,
     removeBug,
+    analyzeBug,
 } from "../services/bugService.js";
 
 const createBug = asyncHandler(async (req, res) => {
@@ -52,6 +53,21 @@ const getBugById = asyncHandler(async (req, res) => {
 
 });
 
+const analyzeBugWithAI = asyncHandler(
+    async (req, res) => {
+        const bug = await analyzeBug(
+            req.params.id,
+            req.user._id
+        );
+
+        res.status(200).json({
+            success: true,
+            message: "Bug analyzed successfully.",
+            data: bug,
+        });
+    }
+);
+
 const updateBug = asyncHandler(async (req, res) => {
 
     const bug = await editBug(
@@ -88,4 +104,5 @@ export {
     getBugById,
     updateBug,
     deleteBug,
+    analyzeBugWithAI,
 };

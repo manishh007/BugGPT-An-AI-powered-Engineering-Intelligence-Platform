@@ -63,7 +63,7 @@ Rules:
 - suggestedFix must contain a practical engineering recommendation.
 - confidence must be an integer from 0 to 100.
 - estimatedComplexity must be exactly one of:
-  "Low", "Medium", "High".
+  "Easy", "Medium", "Hard".
 - Do not include Markdown.
 - Do not include code fences.
 - Do not add any additional fields.
