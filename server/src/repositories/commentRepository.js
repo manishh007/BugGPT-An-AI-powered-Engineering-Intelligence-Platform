@@ -40,7 +40,7 @@ const updateComment = async (
         commentId,
         updatedData,
         {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
         }
     ).populate(

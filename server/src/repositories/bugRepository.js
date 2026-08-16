@@ -68,7 +68,7 @@ const archiveBug = async (bugId) => {
             isArchived: true,
         },
         {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
         }
     );

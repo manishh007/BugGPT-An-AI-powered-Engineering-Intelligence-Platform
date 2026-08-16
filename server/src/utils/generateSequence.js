@@ -12,7 +12,7 @@ const generateSequence = async (projectId, type) => {
             },
         },
         {
-            new: true,
+            returnDocument: "after",
             upsert: true,
             setDefaultsOnInsert: true,
         }

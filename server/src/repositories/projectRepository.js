@@ -24,7 +24,7 @@ const findUserProjects = async (userId) => {
 
 const updateProject = async (projectId, updatedData) => {
     return await Project.findByIdAndUpdate(projectId, updatedData, {
-        new: true,
+        returnDocument: "after",
         runValidators: true,
     });
 };

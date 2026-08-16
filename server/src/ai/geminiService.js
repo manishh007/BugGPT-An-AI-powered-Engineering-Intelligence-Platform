@@ -111,7 +111,7 @@ const generateBugAnalysis = async (bug) => {
     } catch (error) {
         console.error(
             "Gemini API error:",
-            error
+            error.message
         );
 
         if (error instanceof ApiError) {
