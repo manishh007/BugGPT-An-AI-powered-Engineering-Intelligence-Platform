@@ -49,26 +49,37 @@ const getProjects = async (userId) => {
 /**
  * Get a single project
  */
-const getProject = async (projectId, loggedInUserId) => {
-    const project = await findProjectById(projectId);
+const getProject = async (
+    projectId,
+    loggedInUserId
+) => {
+    const project = await findProjectById(
+        projectId
+    );
+
+    if (!project) {
+        throw new ApiError(
+            404,
+            "Project not found."
+        );
+    }
 
     const isOwner =
-        project.createdBy._id.toString() === loggedInUserId.toString();
+        project.createdBy._id.toString() ===
+        loggedInUserId.toString();
 
-    const isMember = project.members.some(
-        (member) =>
-            member.user._id.toString() === loggedInUserId.toString()
-    );
+    const isMember =
+        project.members.some(
+            (member) =>
+                member.user._id.toString() ===
+                loggedInUserId.toString()
+        );
 
     if (!isOwner && !isMember) {
         throw new ApiError(
             403,
             "You are not authorized to view this project."
         );
-    }
-
-    if (!project) {
-        throw new ApiError(404, "Project not found");
     }
 
     return project;
@@ -94,9 +105,24 @@ const editProject = async (
         loggedInUserId
     );
 
+    const allowedUpdates = {
+        name: updatedData.name,
+        description: updatedData.description,
+        priority: updatedData.priority,
+        visibility: updatedData.visibility,
+        tags: updatedData.tags,
+        status: updatedData.status,
+    };
+
+    Object.keys(allowedUpdates).forEach((key) => {
+        if (allowedUpdates[key] === undefined) {
+            delete allowedUpdates[key];
+        }
+    });
+
     const updatedProject = await updateProject(
         projectId,
-        updatedData
+        allowedUpdates
     );
 
     return updatedProject;

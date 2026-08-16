@@ -50,7 +50,7 @@ const updateBug = async (bugId, updatedData) => {
         bugId,
         updatedData,
         {
-            new: true,
+            returnDocument: "after",
             runValidators: true,
         }
     )
@@ -58,7 +58,6 @@ const updateBug = async (bugId, updatedData) => {
         .populate("reportedBy", "name email role")
         .populate("assignedTo", "name email role");
 };
-
 /**
  * Archive Bug
  */

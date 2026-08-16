@@ -4,12 +4,6 @@ const authorizeBugUpdate = (
     bug,
     loggedInUserId
 ) => {
-
-    console.log("Project:", bug.project);
-    console.log("CreatedBy:", bug.project?.createdBy);
-    console.log("ReportedBy:", bug.reportedBy);
-    console.log("AssignedTo:", bug.assignedTo);
-
     const isOwner =
         bug.project.createdBy.toString() ===
         loggedInUserId.toString();

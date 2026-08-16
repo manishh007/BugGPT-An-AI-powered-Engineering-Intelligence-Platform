@@ -234,6 +234,33 @@ const editBug = async (
         loggedInUserId
     );
 
+    if (updatedData.assignedTo) {
+        const project = await findProjectById(
+            bug.project._id
+        );
+
+        if (!project) {
+            throw new ApiError(
+                404,
+                "Project not found."
+            );
+        }
+
+        const isAssignedUserMember =
+            project.members.some(
+                (member) =>
+                    member.user._id.toString() ===
+                    updatedData.assignedTo.toString()
+            );
+
+        if (!isAssignedUserMember) {
+            throw new ApiError(
+                400,
+                "Assigned user must be a member of this project."
+            );
+        }
+    }
+
     const allowedUpdates = {
         title: updatedData.title,
         description: updatedData.description,
